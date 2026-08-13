@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SCVM 2026 — Programação</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+  :root{
+    --ink:#241A26;
+    --paper:#F4EFEA;
+    --paper-raised:#FFFFFF;
+    --plum:#5C2A54;
+    --plum-deep:#3A1A36;
+    --mustard:#C99A2E;
+    --line:#DCD2C8;
+    --muted:#7A6E72;
+  }
+
+  *{ box-sizing:border-box; }
+
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Work Sans', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .wrap{
+    max-width:920px;
+    margin:0 auto;
+    padding:48px 20px 80px;
+  }
+
+  header.hero{
+    margin-bottom:40px;
+  }
+
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--plum);
+    margin:0 0 10px;
+  }
+
+  h1{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:clamp(32px, 5vw, 48px);
+    line-height:1.05;
+    margin:0 0 14px;
+    color:var(--plum-deep);
+  }
+
+  header.hero p{
+    max-width:56ch;
+    color:var(--muted);
+    font-size:15px;
+    line-height:1.6;
+    margin:0;
+  }
+
+  /* Day tabs, styled like a departures board selector */
+  .day-tabs{
+    display:flex;
+    gap:8px;
+    margin:32px 0 0;
+    border-bottom:1px solid var(--line);
+    overflow-x:auto;
+  }
+  .day-tab{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    letter-spacing:.02em;
+    padding:10px 4px;
+    margin-right:20px;
+    background:none;
+    border:none;
+    color:var(--muted);
+    cursor:pointer;
+    white-space:nowrap;
+    position:relative;
+    top:1px;
+  }
+  .day-tab.active{
+    color:var(--plum-deep);
+    font-weight:600;
+    border-bottom:2px solid var(--mustard);
+    padding-bottom:9px;
+  }
+
+  /* Board */
+  .board{
+    margin-top:28px;
+    border:1px solid var(--line);
+    background:var(--paper-raised);
+    border-radius:2px;
+    overflow:hidden;
+  }
+
+  .board-head{
+    display:grid;
+    grid-template-columns:96px 1fr 150px 72px 110px;
+    padding:14px 20px;
+    background:var(--plum-deep);
+    color:#EFE6EC;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+  }
+
+  .row{
+    display:grid;
+    grid-template-columns:96px 1fr 150px 72px 110px;
+    align-items:start;
+    padding:16px 20px;
+    border-top:1px solid var(--line);
+    gap:0;
+  }
+  .row:first-of-type{ border-top:none; }
+  .row.group-start{
+    border-top:2px solid var(--ink);
+  }
+
+  .time{
+    font-family:'IBM Plex Mono', monospace;
+    font-weight:600;
+    font-size:13px;
+    color:var(--plum);
+    padding-top:2px;
+  }
+  .time.repeat{ color:var(--line); }
+
+  .activity h3{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:16.5px;
+    line-height:1.3;
+    margin:0 0 4px;
+    color:var(--ink);
+    padding-right:16px;
+  }
+  .activity .proponente{
+    font-size:13px;
+    color:var(--muted);
+    font-style:italic;
+  }
+
+  .local{
+    font-size:13px;
+    color:var(--ink);
+  }
+  .local .tag{
+    display:inline-block;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10.5px;
+    letter-spacing:.04em;
+    text-transform:uppercase;
+    background:#EFE4E9;
+    color:var(--plum-deep);
+    padding:3px 7px;
+    border-radius:2px;
+  }
+
+  .vagas{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    color:var(--muted);
+  }
+  .vagas.low{ color:#A63D3D; font-weight:600; }
+
+  .cta{
+    text-align:right;
+  }
+  .cta a{
+    display:inline-block;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px;
+    letter-spacing:.04em;
+    text-transform:uppercase;
+    color:var(--plum-deep);
+    text-decoration:none;
+    border:1px solid var(--plum-deep);
+    padding:7px 12px;
+    border-radius:2px;
+    transition:background .15s ease, color .15s ease;
+  }
+  .cta a:hover{
+    background:var(--plum-deep);
+    color:#fff;
+  }
+
+  .block-note{
+    padding:14px 20px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--muted);
+    background:#EFE9E1;
+    border-top:1px solid var(--line);
+  }
+
+  footer.note{
+    margin-top:36px;
+    font-size:13px;
+    color:var(--muted);
+    line-height:1.6;
+    border-top:1px solid var(--line);
+    padding-top:20px;
+  }
+  footer.note strong{ color:var(--ink); }
+
+  /* Mobile */
+  @media (max-width: 640px){
+    .board-head{ display:none; }
+    .row{
+      grid-template-columns:1fr;
+      gap:6px;
+      padding:16px 16px;
+    }
+    .time{
+      font-size:12px;
+      background:var(--plum-deep);
+      color:#fff;
+      display:inline-block;
+      padding:3px 8px;
+      border-radius:2px;
+      width:fit-content;
+    }
+    .activity h3{ padding-right:0; font-size:16px; }
+    .local, .vagas{ font-size:12.5px; }
+    .cta{ text-align:left; margin-top:4px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header class="hero">
+    <p class="eyebrow">SCVM · Semana de Combate à Violência contra a Mulher</p>
+    <h1>Programação 2026</h1>
+    <p>Inscrições feitas pelo SUAP. Cada atividade abre uma guia de inscrição própria — confira sala, horário e vagas antes de clicar em "Inscreva-se".</p>
+  </header>
+
+  <nav class="day-tabs">
+    <button class="day-tab">24/08 · Segunda</button>
+    <button class="day-tab active">25/08 · Terça</button>
+    <button class="day-tab">26/08 · Quarta</button>
+  </nav>
+
+  <section class="board">
+    <div class="board-head">
+      <span>Horário</span>
+      <span>Atividade</span>
+      <span>Local</span>
+      <span>Vagas</span>
+      <span></span>
+    </div>
+
+    <div class="row group-start">
+      <div class="time">08h – 10h</div>
+      <div class="activity">
+        <h3>Mesa de abertura: Violência de Gênero e direitos da população LGBTQIA+</h3>
+        <div class="proponente">Daís Pietra e Maria Cecília</div>
+      </div>
+      <div class="local"><span class="tag">Quadra</span></div>
+      <div class="vagas">—</div>
+      <div class="cta"><a href="#">Inscreva-se</a></div>
+    </div>
+
+    <div class="row group-start">
+      <div class="time">10h20 – 12h20</div>
+      <div class="activity">
+        <h3>Cinema Comentado: Interrompendo Ciclos — curtas "Menina Espantalho" e "Vida de Maria"</h3>
+        <div class="proponente">Deyse Brito</div>
+      </div>
+      <div class="local"><span class="tag">Auditório</span></div>
+      <div class="vagas">—</div>
+      <div class="cta"><a href="#">Inscreva-se</a></div>
+    </div>
+
+    <div class="row">
+      <div class="time repeat">·</div>
+      <div class="activity">
+        <h3>Oficina de defesa pessoal para meninas</h3>
+        <div class="proponente">Marlon Delgado — Movimento Boxe Antifa</div>
+      </div>
+      <div class="local"><span class="tag">Lab. Ed. Física · Sala 205</span></div>
+      <div class="vagas">—</div>
+      <div class="cta"><a href="#">Inscreva-se</a></div>
+    </div>
+
+    <div class="row">
+      <div class="time repeat">·</div>
+      <div class="activity">
+        <h3>Roda de conversa sobre masculinidades (voltada para os meninos)</h3>
+        <div class="proponente">Éder Aguiar</div>
+      </div>
+      <div class="local"><span class="tag">Sala 106</span></div>
+      <div class="vagas">30</div>
+      <div class="cta"><a href="#">Inscreva-se</a></div>
+    </div>
+
+    <div class="row">
+      <div class="time repeat">·</div>
+      <div class="activity">
+        <h3>Roda de conversa "Homem faz; Mulher é": uma provocação a partir da leitura do texto "Dickheads", de David Graeber</h3>
+        <div class="proponente">Daniel Conrado</div>
+      </div>
+      <div class="local"><span class="tag">Sala 107</span></div>
+      <div class="vagas">30</div>
+      <div class="cta"><a href="#">Inscreva-se</a></div>
+    </div>
+
+    <div class="row">
+      <div class="time repeat">·</div>
+      <div class="activity">
+        <h3>ONU Mulheres — comitê de simulação da ONU</h3>
+        <div class="proponente">Profª Ludmila e Maria Eduarda Cunha</div>
+      </div>
+      <div class="local"><span class="tag">Sala 208</span></div>
+      <div class="vagas">—</div>
+      <div class="cta"><a href="#">Inscreva-se</a></div>
+    </div>
+
+    <div class="block-note">12h20 – 14h · Almoço / Apresentação cultural / Escape room</div>
+
+    <div class="row group-start">
+      <div class="time">14h – 16h</div>
+      <div class="activity">
+        <h3>Palestra: Movimentos Sociais de Mulheres e lutas pelos direitos</h3>
+        <div class="proponente">Dirlene</div>
+      </div>
+      <div class="local"><span class="tag">Auditório</span></div>
+      <div class="vagas">—</div>
+      <div class="cta"><a href="#">Inscreva-se</a></div>
+    </div>
+
+    <div class="row">
+      <div class="time repeat">·</div>
+      <div class="activity">
+        <h3>Oficina de defesa pessoal para meninas</h3>
+        <div class="proponente">Paula Clark</div>
+      </div>
+      <div class="local"><span class="tag">Lab. Ed. Física · Sala 205</span></div>
+      <div class="vagas">—</div>
+      <div class="cta"><a href="#">Inscreva-se</a></div>
+    </div>
+
+    <div class="row">
+      <div class="time repeat">·</div>
+      <div class="activity">
+        <h3>Cine debate sobre a série "Adolescência" e oficina de artes visuais</h3>
+        <div class="proponente">Jorddana Rocha, Maria Laura e Projeto Juventudes em Diversidade</div>
+      </div>
+      <div class="local"><span class="tag">Sala 302</span></div>
+      <div class="vagas">—</div>
+      <div class="cta"><a href="#">Inscreva-se</a></div>
+    </div>
+
+    <div class="row">
+      <div class="time repeat">·</div>
+      <div class="activity">
+        <h3>Oficina para construção do varal com o coletivo de artes visuais do Nós da Arte</h3>
+        <div class="proponente">Maria Laura</div>
+      </div>
+      <div class="local"><span class="tag">Lab. de Desenho</span></div>
+      <div class="vagas">—</div>
+      <div class="cta"><a href="#">Inscreva-se</a></div>
+    </div>
+
+    <div class="row">
+      <div class="time repeat">·</div>
+      <div class="activity">
+        <h3>Qual é o meu papel? — roda de conversa destinada aos meninos</h3>
+        <div class="proponente">José Leandro</div>
+      </div>
+      <div class="local"><span class="tag">Sala 307</span></div>
+      <div class="vagas">—</div>
+      <div class="cta"><a href="#">Inscreva-se</a></div>
+    </div>
+
+    <div class="row">
+      <div class="time repeat">·</div>
+      <div class="activity">
+        <h3>Miçangas & Debates</h3>
+        <div class="proponente">Juliana Ventura e Grêmio Estudantil</div>
+      </div>
+      <div class="local"><span class="tag">Sala de Projetos · 301</span></div>
+      <div class="vagas">—</div>
+      <div class="cta"><a href="#">Inscreva-se</a></div>
+    </div>
+
+    <div class="row">
+      <div class="time repeat">·</div>
+      <div class="activity">
+        <h3>Mulheres Trans e LGBTQIAPN+: invisibilidade e violência</h3>
+        <div class="proponente">Nathaly Camille e Álvaro Gomes</div>
+      </div>
+      <div class="local"><span class="tag">Sala 106</span></div>
+      <div class="vagas">—</div>
+      <div class="cta"><a href="#">Inscreva-se</a></div>
+    </div>
+
+  </section>
+
+  <footer class="note">
+    <strong>Como usar este modelo:</strong> é um HTML único — troque os textos das linhas pelas suas atividades e cole o link do SUAP em cada botão "Inscreva-se". Para publicar no Google Sites, use Inserir → Incorporar → Incorporar código e cole este arquivo, ou hospede-o (ex: GitHub Pages) e incorpore por URL. Preencha "Vagas" para os campos marcados com "—" — é a informação que mais falta hoje na programação.
+  </footer>
+
+</div>
+
+</body>
+</html>
