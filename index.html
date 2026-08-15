@@ -18,7 +18,7 @@
     --muted:#7A6E72;
   }
 
-  *{ box-sizing:border-box; }
+  *{ box-sizing:border-box !important; }
 
   body{
     margin:0;
@@ -29,8 +29,9 @@
   }
 
   .wrap{
-    max-width:920px;
-    margin:0 auto;
+    max-width:920px !important;
+    width:100% !important;
+    margin:0 auto !important;
     padding:48px 20px 80px;
   }
 
@@ -104,6 +105,8 @@
 
   /* Board */
   .board{
+    width:100% !important;
+    max-width:100% !important;
     border:1px solid var(--line);
     background:var(--paper-raised);
     border-radius:2px;
@@ -175,7 +178,6 @@
     padding:3px 7px;
     border-radius:2px;
   }
-
 
   .cta{ text-align:right; }
   .cta a{
@@ -292,7 +294,7 @@
         <div class="time repeat">·</div>
         <div class="activity">
           <h3>Roda de conversa "Homem faz; Mulher é": uma provocação a partir da leitura do texto "Dickheads", de David Graeber</h3>
-          <div class="proponente">Proponente:Profº Daniel Conrado e Maria Luiza Sales Umbelino Vieira </div>
+          <div class="proponente">Proponente: Profº Daniel Conrado e Maria Luiza Sales Umbelino Vieira</div>
         </div>
         <div class="local"><span class="tag">Sala 107</span></div>
         <div class="cta"><a href="#">Inscreva-se</a></div>
@@ -301,7 +303,7 @@
         <div class="time repeat">·</div>
         <div class="activity">
           <h3>ONU Mulheres — comitê de simulação da ONU</h3>
-          <div class="proponente">Proponentes: Profª Ludmila Murta e Maria Eduarda Cunha </div>
+          <div class="proponente">Proponentes: Profª Ludmila Murta e Maria Eduarda Cunha</div>
         </div>
         <div class="local"><span class="tag">Sala 108</span></div>
         <div class="cta"><a href="#">Inscreva-se</a></div>
@@ -313,7 +315,7 @@
         <div class="time">14h – 16h</div>
         <div class="activity">
           <h3>Palestra: Movimentos Sociais de Mulheres e lutas pelos direitos</h3>
-          <div class="proponente">Proponente: Dirlene Marques - Professora Aposentada de Economia da UFMG e Organizadora do movimento de mulheres 8M de Belo Horizonte </div>
+          <div class="proponente">Proponente: Dirlene Marques - Professora Aposentada de Economia da UFMG e Organizadora do movimento de mulheres 8M de Belo Horizonte</div>
         </div>
         <div class="local"><span class="tag">Auditório</span></div>
         <div class="cta"><a href="#">Inscreva-se</a></div>
@@ -331,20 +333,11 @@
         <div class="time repeat">·</div>
         <div class="activity">
           <h3>Cine debate sobre a série "Adolescência" e oficina de artes visuais</h3>
-          <div class="proponente">Proponentes: Jorddana Rocha,Maria Laura e Projeto Juventudes em Diversidade</div>
+          <div class="proponente">Proponentes: Jorddana Rocha, Maria Laura e Projeto Juventudes em Diversidade</div>
         </div>
         <div class="local"><span class="tag">Sala 302</span></div>
         <div class="cta"><a href="#">Inscreva-se</a></div>
       </div>
-      <!--<div class="row">
-        <div class="time repeat">·</div>
-        <div class="activity">
-          <h3>Oficina para construção do varal com o coletivo de artes visuais do Nós da Arte</h3>
-          <div class="proponente">Proponente: Maria Laura</div>
-        </div>
-        <div class="local"><span class="tag">Lab. de Desenho</span></div>
-        <div class="cta"><a href="#">Inscreva-se</a></div>
-      </div>  -->
       <div class="row">
         <div class="time repeat">·</div>
         <div class="activity">
@@ -358,7 +351,7 @@
         <div class="time repeat">·</div>
         <div class="activity">
           <h3>Miçangas & Debates</h3>
-          <div class="proponente">Proponentes: Profª Juliana Ventura e Maria Vitória </div>
+          <div class="proponente">Proponentes: Profª Juliana Ventura e Maria Vitória</div>
         </div>
         <div class="local"><span class="tag">Sala de Projetos 201</span></div>
         <div class="cta"><a href="#">Inscreva-se</a></div>
@@ -410,7 +403,7 @@
         <div class="time">8h – 10h</div>
         <div class="activity">
           <h3>Antifeminismo, movimento Red Pill e a Violência Digital contra às Mulheres</h3>
-          <div class="proponente">Proponente: : Sofia Amaral — mestranda em ciência política/UFMG e pesquisadora do Núcleo de Estudos e Pesquisa sobre a Mulher (NEPEM/UFMG)</div>
+          <div class="proponente">Proponente: Sofia Amaral — mestranda em ciência política/UFMG e pesquisadora do Núcleo de Estudos e Pesquisa sobre a Mulher (NEPEM/UFMG)</div>
         </div>
         <div class="local"><span class="tag">Quadra</span></div>
         <div class="cta"><a href="#">Inscreva-se</a></div>
@@ -456,7 +449,7 @@
         <div class="time repeat">·</div>
         <div class="activity">
           <h3>Roda de conversa "Homem faz; Mulher é": uma provocação a partir da leitura do texto "Dickheads", de David Graeber</h3>
-          <div class="proponente">Proponente: Profº Daniel Conrado e Maria Luiza Sales Umbelino Vieira </div>
+          <div class="proponente">Proponente: Profº Daniel Conrado e Maria Luiza Sales Umbelino Vieira</div>
         </div>
         <div class="local"><span class="tag">Sala 109</span></div>
         <div class="cta"><a href="#">Inscreva-se</a></div>
@@ -506,27 +499,28 @@
       </div>
     </section>
   </div>
-</div>
 
-  <!-- ===================== DIA Feira===================== -->
-<div class="day-panel" id="feira-empreendedoras">
-  <section class="board">
-    <div class="board-head">
-      <span>Horário</span><span>Atividade</span><span>Local</span><span></span>
-    </div>
-
-    <div class="row group-start">
-      <div class="time">8h – 10h</div>
-      <div class="activity">
-        <h3>Feira de Empreendedoras</h3>
-        <div class="proponente">Proponentes: A definir</div>
+  <!-- ===================== FEIRA DE EMPREENDEDORAS ===================== -->
+  <div class="day-panel" id="feira-empreendedoras">
+    <section class="board">
+      <div class="board-head">
+        <span>Horário</span><span>Atividade</span><span>Local</span><span></span>
       </div>
-      <div class="local"><span class="tag">A definir</span></div>
-      <div class="cta"><a href="#">Inscreva-se</a></div>
-    </div>
-  </section>
+
+      <div class="row group-start">
+        <div class="time">8h – 10h</div>
+        <div class="activity">
+          <h3>Feira de Empreendedoras</h3>
+          <div class="proponente">Proponentes: A definir</div>
+        </div>
+        <div class="local"><span class="tag">A definir</span></div>
+        <div class="cta"><a href="#">Inscreva-se</a></div>
+      </div>
+    </section>
+  </div>
+
 </div>
-  
+
 <script>
   document.querySelectorAll('.day-tab').forEach(function(tab){
     tab.addEventListener('click', function(){
